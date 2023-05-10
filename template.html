@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文物卡片</title>
+    <style>
+        body {
+            background-color: #FFFF99;
+        }
+
+        .single-card {
+            display: inline-block;
+            border-radius: 5px;
+            box-shadow: 5px 15px 15px #666;
+            background-color: #ffffffcc;
+            width: 1200px;
+            padding: 15px;
+            height: 640px;
+            margin: auto;
+            z-index: 999;
+            border-radius:40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        style="top: 0; left: 0; right: 0; bottom: 0; position: fixed; justify-content: center; align-items: center; height: 100%;width: 100%;display: flex;">
+        <div class="single-card">
+            <div style="height: 360px;">
+                <center>
+                    <h1>文物名称</h1>
+                </center>
+                <div>
+                    <h3>文物信息</h3>
+                    <strong><span style="font-size: 20px;"> 朝代：</span></strong> 在这里填入内容 <br>
+                    <strong><span style="font-size: 20px;"> 出土地点：</span></strong> 在这里填入内容 <br>
+                    <strong><span style="font-size: 20px;"> 现存地点：</span></strong> 在这里填入内容 <br>
+                    <h3>文物描述</h3>
+                    在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容在这里填入内容
+                </div>
+                <!--<br>换行-->
+            </div>
+            <div
+                style="text-align: center; line-height: 240px; font-size: 0; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" height="56px"
+                    style="display: inline-block;vertical-align: middle;cursor: pointer;">
+                    <path
+                        d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z" />
+                </svg>
+                <img style="display: inline-block; height: 240px; width: 427px;" src="" id="image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" height="56px"
+                    style="display: inline-block;vertical-align: middle;cursor: pointer;">
+                    <path
+                        d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        const imageCnt = 3;//放三张图片
+        let nowID = 0;
+        const imageBase64s = [ //每张图片的base64 建议使用https://www.fishlee.net/Tools/GetImageBase64Code
+            "(网站上将图片转换后得到的内容，直接复制粘贴到双引号中，记得去掉括号)",
+            "(网站上将图片转换后得到的内容，直接复制粘贴到双引号中，记得去掉括号)",
+            "(网站上将图片转换后得到的内容，直接复制粘贴到双引号中，记得去掉括号)",
+        ];
+
+        let elementImg = null;
+        let elementLeft = null;
+        let elementRight = null;
+
+        const updateStatus = () => {
+            if (nowID <= 0) {
+                elementLeft.style.cursor = 'not-allowed';
+                elementLeft.style.fill = '#CCC';
+            }
+            else {
+                elementLeft.style.cursor = 'pointer';
+                elementLeft.style.fill = '#000';
+            }
+            if (nowID >= imageCnt - 1) {
+                elementRight.style.cursor = 'not-allowed';
+                elementRight.style.fill = '#CCC';
+            }
+            else {
+                elementRight.style.cursor = 'pointer';
+                elementRight.style.fill = '#000';
+            }
+            elementImg.setAttribute('src', imageBase64s[nowID]);
+        }
+
+        window.onload = () => {
+            elementImg = document.getElementById('image');
+            elementLeft = document.getElementsByTagName('svg')[0];
+            elementRight = document.getElementsByTagName('svg')[1];
+            updateStatus();
+
+            document.getElementsByTagName('svg')[0].addEventListener('click', () => {
+                if (nowID > 0) nowID--;
+                updateStatus();
+            });
+
+            document.getElementsByTagName('svg')[1].addEventListener('click', () => {
+                if (nowID < imageCnt - 1) nowID++;
+                updateStatus();
+            });
+        }
+    </script>
+</body>
+
+</html>
